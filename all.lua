@@ -1,4 +1,12 @@
-local day01 = require('src.day01')
+if arg[1] == nil then
+    print("usage: lua all.lua [days]")
+    os.exit(1)
+end
 
-print("Day 1 part 1: "  .. day01.frequency_result())
-print("Day 1 part 2: "  .. day01.reach_result())
+for day = 1, arg[1] do
+    local module = require(string.format("src.day%02d", day))
+
+    print(string.format("Day %s part 1: ", day) .. module.first())
+    print(string.format("Day %s part 2: ", day) .. module.second())
+end
+

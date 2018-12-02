@@ -30,11 +30,11 @@ function day01.reach(input)
     end
 end
 
-function day01.frequency_result()
+function day01.first()
     return day01.frequency(puzzle_input)
 end
 
-function day01.reach_result()
+function day01.second()
     return day01.reach(puzzle_input)
 end
 
