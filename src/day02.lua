@@ -40,14 +40,14 @@ function day02.equal(input)
 end
 
 function day02.checksum(input)
-    record = { a = 0, b = 0 }
+    local total = { double = 0, triple = 0 }
     for line in string.gmatch(input, "%w+") do
         local count = day02.count(line)
-        record.a = record.a + count[1]
-        record.b = record.b + count[2]
+        total.double = total.double + count.double
+        total.triple = total.triple + count.triple
     end
 
-    return record.a * record.b
+    return total.double * total.triple
 end
 
 function day02.count(input)
@@ -60,17 +60,13 @@ function day02.count(input)
         end
     end
 
-    local result = {}
+    local result = { double = 0, triple = 0 }
     if helper.table_contains(found, 2) == true then
-        table.insert(result, 1)
-    else
-        table.insert(result, 0)
+        result.double = 1
     end
 
     if helper.table_contains(found, 3) == true then
-        table.insert(result, 1)
-    else
-        table.insert(result, 0)
+        result.triple = 1
     end
 
     return result
