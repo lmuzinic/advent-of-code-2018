@@ -1,0 +1,18 @@
+#!/usr/bin/env lua
+
+local pfile = io.popen('ls -a src/')
+local module_name
+
+for filename in pfile:lines() do
+    module_name = string.match(filename, '(day%d+)')
+    if (module_name) then
+        local module = require("src." .. module_name)
+        local day = string.upper(string.sub(module_name, 1,1)) .. string.sub(module_name, 2)
+
+        print(day .. " part 1: " .. module.first())
+        print(day .. " part 2: " .. module.second())
+    end
+end
+
+pfile:close()
+os.exit(0)
