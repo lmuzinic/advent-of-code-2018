@@ -3,14 +3,24 @@
 local pfile = io.popen('ls -a src/')
 local module_name
 
+print("Day \t1st \t\t2nd")
 for filename in pfile:lines() do
     module_name = string.match(filename, '(day%d+)')
     if (module_name) then
         local module = require("src." .. module_name)
-        local day = string.upper(string.sub(module_name, 1,1)) .. string.sub(module_name, 2)
+        local day = string.upper(string.sub(module_name, 4))
 
-        print(day .. " part 1: " .. module.first())
-        print(day .. " part 2: " .. module.second())
+        local first_duration = os.clock()
+        local first = module.first()
+        first_duration = os.clock() - first_duration
+
+        local second_duration = os.clock()
+        local second = module.second()
+        second_duration = os.clock() - second_duration
+
+        print(string.format('%s\t%s\t\t%s', day, first, second))
+        print(string.format('\t(in %0.2f sec)\t(in %0.2f sec)', first_duration, second_duration))
+        print('')
     end
 end
 
